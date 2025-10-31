@@ -31,10 +31,7 @@ let globalTokenExpiresOn: Date | null = null;
 
 // Function to create SQL config with fresh access token, returns token and expiry
 export async function createSqlConfig(): Promise<{ config: sql.config, token: string, expiresOn: Date }> {
-  const credential = new InteractiveBrowserCredential({
-    redirectUri: 'http://localhost'
-    // disableAutomaticAuthentication : true
-  });
+  const credential = new DefaultAzureCredential();
   const accessToken = await credential.getToken('https://database.windows.net/.default');
 
   const trustServerCertificate = process.env.TRUST_SERVER_CERTIFICATE?.toLowerCase() === 'true';
