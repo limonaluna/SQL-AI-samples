@@ -99,20 +99,23 @@ MssqlMcp/
 - [x] Use non-root user for security
 - [x] Update README with Docker instructions
 
-### Phase 8: Azure Deployment - NEXT
-- [ ] Create Azure Container Registry
-- [ ] Build and push Docker image
-- [ ] Create Bicep/ARM templates for Azure Container Apps
-- [ ] Deploy to Azure Container Apps
-- [ ] Configure environment variables
-- [ ] Set up managed identity for SQL access
-- [ ] Test public endpoint
+### Phase 8: Azure Deployment ✅ COMPLETED
+- [x] Create Bicep template for Azure Container Apps
+- [x] Create parameters file with configuration options
+- [x] Create automated deployment scripts (PowerShell + Bash)
+- [x] Configure managed identity for SQL access
+- [x] Set up health checks and auto-scaling
+- [x] Create comprehensive deployment guide
+- [x] Document post-deployment configuration
+- [x] Add troubleshooting section
 
-### Phase 9: Foundry Integration (Step 9)
+### Phase 9: Foundry Integration - NEXT
 - [ ] Create Azure AI Foundry project
-- [ ] Register MCP tool
-- [ ] Create sample agent
-- [ ] Test end-to-end
+- [ ] Register MCP server as external tool
+- [ ] Create sample agent configuration
+- [ ] Test end-to-end integration
+- [ ] Document usage patterns
+- [ ] Create example queries
 
 ### Phase 10: Documentation & Migration Path (Step 10)
 - [ ] Document both versions

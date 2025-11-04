@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "eastus"
+    },
+    "environmentName": {
+      "value": "mcp-foundry-env"
+    },
+    "containerAppName": {
+      "value": "mssql-mcp-foundry"
+    },
+    "containerImage": {
+      "value": "<your-acr>.azurecr.io/mssql-mcp-foundry:latest"
+    },
+    "sqlServerName": {
+      "value": "mcp-ilona"
+    },
+    "sqlDatabaseName": {
+      "value": "contoso"
+    },
+    "apiKey": {
+      "value": "<generate-a-secure-api-key>"
+    },
+    "allowedOrigins": {
+      "value": "https://ai.azure.com,https://ml.azure.com"
+    },
+    "enableRateLimiting": {
+      "value": true
+    },
+    "cpu": {
+      "value": "0.5"
+    },
+    "memory": {
+      "value": "1Gi"
+    },
+    "minReplicas": {
+      "value": 1
+    },
+    "maxReplicas": {
+      "value": 3
+    }
+  }
+}
