@@ -11,6 +11,7 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
+import { apiKeyAuth, rateLimiter } from './middleware/auth.js';
 
 // Load environment variables
 dotenv.config();
@@ -24,6 +25,22 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+
+// Authentication middleware (optional based on API_KEY env var)
+if (process.env.API_KEY) {
+  console.log('🔒 API Key authentication enabled');
+  app.use(apiKeyAuth);
+  
+  // Optional: Rate limiting
+  if (process.env.ENABLE_RATE_LIMITING === 'true') {
+    const maxRequests = parseInt(process.env.RATE_LIMIT_MAX || '100');
+    const windowMs = parseInt(process.env.RATE_LIMIT_WINDOW_MS || '60000');
+    console.log(`⏱️  Rate limiting enabled: ${maxRequests} requests per ${windowMs}ms`);
+    app.use(rateLimiter(maxRequests, windowMs));
+  }
+} else {
+  console.log('⚠️  WARNING: Running without authentication - set API_KEY for production');
+}
 
 // Global SQL connection
 let globalSqlPool: sql.ConnectionPool | null = null;
