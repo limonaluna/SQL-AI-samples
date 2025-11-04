@@ -1,6 +1,41 @@
 import { Request, Response, NextFunction } from 'express';
 
 /**
+ * User context for audit trails
+ */
+export interface UserContext {
+  userId: string;
+  source: 'api-key' | 'anonymous';
+  apiKeyHash?: string;
+}
+
+/**
+ * Get user context from request
+ * Maps API keys to user identifiers for audit trails
+ */
+export function getUserContext(req: Request): UserContext {
+  const apiKey = 
+    req.headers['x-api-key'] as string ||
+    req.headers['authorization']?.replace('Bearer ', '') ||
+    req.query.apiKey as string;
+
+  if (apiKey) {
+    // Simple hash of API key for audit (not for security!)
+    const hash = Buffer.from(apiKey).toString('base64').substring(0, 8);
+    return {
+      userId: `api-key-${hash}`,
+      source: 'api-key',
+      apiKeyHash: hash
+    };
+  }
+
+  return {
+    userId: 'anonymous',
+    source: 'anonymous'
+  };
+}
+
+/**
  * API Key Authentication Middleware
  * 
  * Validates requests using an API key from:
@@ -41,6 +76,9 @@ export function apiKeyAuth(req: Request, res: Response, next: NextFunction) {
       message: 'Invalid API key'
     });
   }
+
+  // Store user context for audit trails
+  (req as any).userContext = getUserContext(req);
 
   // Authentication successful
   next();

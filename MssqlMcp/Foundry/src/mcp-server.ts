@@ -217,7 +217,8 @@ async function executeReadData(args: any) {
     success: true,
     message: `Retrieved ${result.recordset.length} record(s)`,
     data: result.recordset,
-    recordCount: result.recordset.length
+    recordCount: result.recordset.length,
+    executedAt: new Date().toISOString()
   };
 }
 
@@ -236,7 +237,9 @@ async function executeListTable(args: any) {
   return {
     success: true,
     message: 'List tables executed successfully',
-    tables: result.recordset
+    tables: result.recordset,
+    tableCount: result.recordset.length,
+    executedAt: new Date().toISOString()
   };
 }
 
@@ -255,7 +258,10 @@ async function executeDescribeTable(args: any) {
   
   return {
     success: true,
-    columns: result.recordset
+    tableName: tableName,
+    columns: result.recordset,
+    columnCount: result.recordset.length,
+    executedAt: new Date().toISOString()
   };
 }
 
