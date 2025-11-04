@@ -91,15 +91,21 @@ MssqlMcp/
 - [ ] Test all tool operations
 - [ ] Add comprehensive error handling
 
-### Phase 7: Containerization (Step 7)
-- [ ] Create Dockerfile
-- [ ] Build and test container locally
-- [ ] Add docker-compose for testing
+### Phase 7: Containerization ✅ COMPLETED
+- [x] Create Dockerfile with multi-stage build
+- [x] Add .dockerignore file
+- [x] Create docker-compose.yml for local testing
+- [x] Configure health checks
+- [x] Use non-root user for security
+- [x] Update README with Docker instructions
 
-### Phase 8: Azure Deployment (Step 8)
-- [ ] Create Bicep/ARM templates
+### Phase 8: Azure Deployment - NEXT
+- [ ] Create Azure Container Registry
+- [ ] Build and push Docker image
+- [ ] Create Bicep/ARM templates for Azure Container Apps
 - [ ] Deploy to Azure Container Apps
 - [ ] Configure environment variables
+- [ ] Set up managed identity for SQL access
 - [ ] Test public endpoint
 
 ### Phase 9: Foundry Integration (Step 9)
